@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon"   type="logo"   href="login_img/gengeng.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="login.css" />
+    <title>GengGeng</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="forms-container">
+        <div class="signin-signup"> 
+          <form action="index.html" class="sign-in-form" id="login">
+            <h2 class="title">Sign in</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input id="email_signin" type="text" placeholder="Username">
+            </div>  
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input id="psw_sign" type="password" placeholder="Password" />
+            </div>
+            <span id="auth" style="text-align: center;" ></span>
+            <input id="button_signin" type="submit" value="Login" class="btn solid" />  
+            <p class="social-text">Or Sign in with social platforms</p>
+            <div class="social-media">
+              <a href="https://www.facebook.com/" class="social-icon">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://twitter.com/" class="social-icon">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a  id="google-signin-btn" class="social-icon">
+                <i href="google.com"class="fab fa-google"></i>
+              </a>
+              <a  class="social-icon"> 
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </form>
+          <form action="#login" class="sign-up-form" id="submitsignup">
+            <h2 class="title">Sign up</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Name" id="name" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Phone Number" id="nohp" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input type="email" placeholder="Email"  id="email_signup"/>
+            </div>  
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" id="psw_signup"/>
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Confirm Password" id="Confirm_Password"/>
+            </div>    
+            <span id="auth" style="text-align: center;" ></span>
+            <input type="submit" class="btn" value="Sign up" id="button_signup" />
+            <!--
+            <p class="social-text">Or Sign up with social platforms</p>
+            <div class="social-media">
+              <a href="https://www.facebook.com/" class="social-icon">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://twitter.com/" class="social-icon">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="https://accounts.google.com/" class="social-icon">
+                <i class="fab fa-google"></i>
+              </a>
+              <a href="https://www.linkedin.com/" class="social-icon">
+                <i class= "fab fa-linkedin-in"></i>
+              </a
+            </div>
+            -->       
+          </form>
+        </div>
+      </div>
+
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>New here ?</h3>
+            <p>
+                Ready for a cinematic journey like no other? Welcome to ClipWatch 
+            </p>
+            <button class="btn transparent" id="sign-up-btn"> 
+              Sign up
+            </button>
+          </div>
+          <img src="/login_img/ClipWatch__1_-removebg-preview.png" class="image" alt=""  style="height: -500px;" />
+        </div>
+        <div class="panel right-panel">
+          <div class="content">
+            <h3>One of us ?</h3>
+            <p>
+                Join GengGeng today and immerse yourself in a world of cinematic wonders. Lights, camera, action – your entertainment journey begins here! 
+            </p>
+            <button class="btn transparent" id="sign-in-btn">
+              Sign in
+            </button>
+          </div>
+          <img src="/login_img/ClipWatch__1_-removebg-preview.png" class="image" alt="" style="height: -500px;"/>
+        </div>
+      </div>
+    </div>  
+
+    <script src="login.js"></script>
+    <!--
+      <script src="loginauth.js"></script>
+    -->
+    <script  type="module" >
+  
+       //Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+      import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+      import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBrKgmtuJDPt5edV8mgqZZHYr_tls02wg4",
+        authDomain: "clip-watch-c41d9.firebaseapp.com",
+        databaseURL: "https://clip-watch-c41d9-default-rtdb.firebaseio.com",
+        projectId: "clip-watch-c41d9",
+        storageBucket: "clip-watch-c41d9.appspot.com",
+        messagingSenderId: "747823041806",
+        appId: "1:747823041806:web:6d677aec8f14fbaf4edb5f"
+      };
+     
+      // Initialize Firebase
+     const app = initializeApp(firebaseConfig);
+     const auth = getAuth(app);
+     const database = getDatabase(app);
+     
+     const buttonSignup = document.getElementById("button_signup");
+     const buttonSignin = document.getElementById("button_signin");
+     
+     buttonSignup.addEventListener('click', (e) => {
+    e.preventDefault(); // Prevent form submission
+
+    let name = document.getElementById("name").value;
+    let nohp = document.getElementById("nohp").value;
+    let emailSignup = document.getElementById("email_signup").value;
+    let passwordSignup = document.getElementById("psw_signup").value;
+    let confirmPassword = document.getElementById("Confirm_Password").value;
+
+    // Check if passwords match
+    if (passwordSignup !== confirmPassword) {
+        alert("Passwords do not match. Please try again.");
+        return; // Exit the function if passwords don't match
+    }
+
+    // Proceed with account creation if passwords match
+    createUserWithEmailAndPassword(auth, emailSignup, passwordSignup)
+        .then((userCredentials) => {
+            // signup
+            const user = userCredentials.user;
+            set(ref(database, "users/" + user.uid), {
+                name: name,
+                nohp: nohp,
+                email: emailSignup,
+                password: passwordSignup,
+            });
+        })
+        .then(() => {
+            alert("User registered successfully");
+        })
+        .catch((error) => {
+            alert(error.message);
+        });
+});
+
+     
+     buttonSignin.addEventListener("click", (e) => {
+        e.preventDefault(); // Prevent form submission
+        let emailSignin = document.getElementById("email_signin").value;
+        let passwordSignin = document.getElementById("psw_sign").value; // Corrected ID
+        
+        signInWithEmailAndPassword(auth, emailSignin, passwordSignin)
+            .then((userCredentials) => {
+                //signin
+                const user = userCredentials.user;
+                location.href = "http://127.0.0.1:5500/index.html"
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
+     })
+
+
+// ptang ina mo Google Sign-In 
+
+const googleSignInBtn = document.getElementById("google-signin-btn");
+
+googleSignInBtn.addEventListener("click", (e) => {
+    e.preventDefault(); 
+
+    const provider = new GoogleAuthProvider();
+
+    
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+           
+            const user = result.user;
+             location.href = "http://127.0.0.1:5500/index.html";
+        })
+        .catch((error) => {
+            // Handle errors here
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert("The email have already acc");
+            const email = error.email;
+            // The AuthCredential type that was used.
+            alert("error");
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+            alert("errors");
+            alert(errorMessage);
+        });
+});
+
+     </script>
+  </body>
+</html>   
